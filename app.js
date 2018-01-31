@@ -153,9 +153,9 @@ appio.listen(app.get('port'), function(){
 });
 
 var chat = io.on('connection', function(socket){
-    console.log('a user socket connected');
+
     socket.on('disconnect', function(data){
-        console.log('user disconnected');
+        // console.log('user disconnected');
         var room = findClientsSocket(io, data.id);
         // Notify the other person in the chat room 通知对方在聊天室
         // that his partner has left 他的合作伙伴已经离开
@@ -179,7 +179,7 @@ var chat = io.on('connection', function(socket){
         socket.broadcast.to(socket.room).emit('node click', msg);
     });
     socket.on('login', function(data){
-
+        console.log('一个用户登陆了进来了。。。');
         var room = findClientsSocket(io, data.id);
 
         // Only two people per room are allowed每个房间只有两个人是允许的
