@@ -2,66 +2,69 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
     <title><%= title %></title>
-    <meta name="description" content="Convert any text into network to get a better overview and interesting insights." />
-    <meta name="keywords"  content="tna, text network analysis, network, text, dataviz, bigdata" />
+    <meta name="description"
+          content="Convert any text into network to get a better overview and interesting insights."/>
+    <meta name="keywords" content="tna, text network analysis, network, text, dataviz, bigdata"/>
 
 
-
-    <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.fullPage.css" />
-    <link rel="stylesheet" type="text/css" href="/stylesheets/fullPage.extras.css" />
-    <link type="text/css" rel="stylesheet" href="/stylesheets/featherlight.css" title="Featherlight Styles" />
-
+    <link rel="stylesheet" type="text/css" href="/stylesheets/jquery.fullPage.css"/>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/fullPage.extras.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/featherlight.css" title="Featherlight Styles"/>
 
 
     <style>
 
-            /* Sections
-             * --------------------------------------- */
+        /* Sections
+         * --------------------------------------- */
 
-        .intro p{
+        .intro p {
             width: 50%;
             margin: 0 auto;
             font-size: 1.5em;
-            z-index:10;
+            z-index: 10;
         }
-        .twitter-share-button{
+
+        .twitter-share-button {
             position: absolute;
             z-index: 99;
             right: 149px;
             top: 9px;
         }
 
-
-        #section0{
+        #section0 {
             background: -webkit-gradient(linear, top left, bottom left, from(#efe9e9), to(#e0e3e3));
             background: -webkit-linear-gradient(#efe9e9, #e0e3e3);
-            background: linear-gradient(#efe9e9,#e0e3e3);
+            background: linear-gradient(#efe9e9, #e0e3e3);
         }
-        #section1{
+
+        #section1 {
             background: -webkit-gradient(linear, top left, bottom left, from(#9799f8), to(#f2bee7));
             background: -webkit-linear-gradient(#9799f8, #f2bee7);
-            background: linear-gradient(#9799f8,#f2bee7);
+            background: linear-gradient(#9799f8, #f2bee7);
         }
-        #section2{
+
+        #section2 {
             background: -webkit-gradient(linear, top left, bottom left, from(#969ac6), to(#636F8F));
             background: -webkit-linear-gradient(#969AC6, #636F8F);
-            background: linear-gradient(#969AC6,#636F8F);
+            background: linear-gradient(#969AC6, #636F8F);
         }
 
-        #section3{
+        #section3 {
             background: -webkit-gradient(linear, top left, bottom left, from(#a3abd8), to(#c2b7f8));
             background: -webkit-linear-gradient(#a3abd8, #c2b7f8);
-            background: linear-gradient(#a3abd8,#c2b7f8);
+            background: linear-gradient(#a3abd8, #c2b7f8);
         }
-        #section4{
+
+        #section4 {
             background: -webkit-gradient(linear, top left, bottom left, from(#f8a3dc), to(#a0b6ff));
             background: -webkit-linear-gradient(#f8a3dc, #a0b6ff);
-            background: linear-gradient(#f8a3dc,#a0b6ff);
+            background: linear-gradient(#f8a3dc, #a0b6ff);
 
         }
+
         #network-canvas {
             position: absolute;
             top: 0;
@@ -70,27 +73,33 @@
             height: 100%;
             z-index: 1;
         }
-        #slide2{
+
+        #slide2 {
             background: -webkit-gradient(linear, top left, bottom left, from(#d7cdea), to(#f874d3));
             background: -webkit-linear-gradient(#d7cdea, #f874d3);
-            background: linear-gradient(#b8d3f5,#8992b6);
+            background: linear-gradient(#b8d3f5, #8992b6);
         }
-        #slide3{
+
+        #slide3 {
             background: -webkit-gradient(linear, top left, bottom left, from(#92a1ca), to(#76c2bd));
             background: -webkit-linear-gradient(#92a1ca, #76c2bd);
-            background: linear-gradient(#7BAABE,#969AC6);
+            background: linear-gradient(#7BAABE, #969AC6);
         }
-        #slide5{
+
+        #slide5 {
             background: -webkit-gradient(linear, top left, bottom left, from(#92a1ca), to(#76c2bd));
             background: -webkit-linear-gradient(#92a1ca, #76c2bd);
-            background: linear-gradient(#a0c6f5,#f9dfeb);
+            background: linear-gradient(#a0c6f5, #f9dfeb);
         }
 
 
     </style>
     <!--[if IE]>
     <script type="text/javascript">
-        var console = { log: function() {} };
+        var console = {
+            log: function () {
+            }
+        };
     </script>
     <![endif]-->
 
@@ -104,7 +113,7 @@
 
     <script type="text/javascript" src="/javascripts/jquery.fullPage.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#fullpage').fullpage({
                 anchors: ['home', 'features', 'usecases', 'graphs', 'about'],
                 menu: '#menu',
@@ -114,14 +123,13 @@
                 loopBottom: true
             });
 
-           /* $('#content-box').animate({scrollLeft: 100}, 800);*/
+            /* $('#content-box').animate({scrollLeft: 100}, 800);*/
 
-            $(".menuhit").click(function(){
+            $(".menuhit").click(function () {
                 var moveby = $(this).position().left;
-                $('#content-box').animate({scrollLeft: moveby-10}, 800);
+                $('#content-box').animate({scrollLeft: moveby - 10}, 800);
                 return true;
             });
-
 
 
             var width, height, canvas, ctx, points, target, animateHeader = true;
@@ -134,7 +142,7 @@
             function initHeader() {
                 width = window.innerWidth;
                 height = window.innerHeight;
-                target = {x: width/2, y: height/2};
+                target = {x: width / 2, y: height / 2};
 
                 //console.log("test",document.getElementById('large-header'));
 
@@ -145,35 +153,35 @@
 
                 // create points
                 points = [];
-                for(var x = 0; x < width; x = x + width/20) {
-                    for(var y = 0; y < height; y = y + height/20) {
-                        var px = x + Math.random()*width/20;
-                        var py = y + Math.random()*height/20;
-                        var p = {x: px, originX: px, y: py, originY: py };
+                for (var x = 0; x < width; x = x + width / 20) {
+                    for (var y = 0; y < height; y = y + height / 20) {
+                        var px = x + Math.random() * width / 20;
+                        var py = y + Math.random() * height / 20;
+                        var p = {x: px, originX: px, y: py, originY: py};
                         points.push(p);
                     }
                 }
 
                 // for each point find the 5 closest points
-                for(var i = 0; i < points.length; i++) {
+                for (var i = 0; i < points.length; i++) {
                     var closest = [];
                     var p1 = points[i];
-                    for(var j = 0; j < points.length; j++) {
+                    for (var j = 0; j < points.length; j++) {
                         var p2 = points[j]
-                        if(!(p1 == p2)) {
+                        if (!(p1 == p2)) {
                             var placed = false;
-                            for(var k = 0; k < 6; k++) {
-                                if(!placed) {
-                                    if(closest[k] == undefined) {
+                            for (var k = 0; k < 6; k++) {
+                                if (!placed) {
+                                    if (closest[k] == undefined) {
                                         closest[k] = p2;
                                         placed = true;
                                     }
                                 }
                             }
 
-                            for(var k = 0; k < 6; k++) {
-                                if(!placed) {
-                                    if(getDistance(p1, p2) < getDistance(p1, closest[k])) {
+                            for (var k = 0; k < 6; k++) {
+                                if (!placed) {
+                                    if (getDistance(p1, p2) < getDistance(p1, closest[k])) {
                                         closest[k] = p2;
                                         placed = true;
                                     }
@@ -185,15 +193,15 @@
                 }
 
                 // assign a circle to each point
-                for(var i in points) {
-                    var c = new Circle(points[i], 2+Math.random()*10, 'rgba(255,255,255,0.3)');
+                for (var i in points) {
+                    var c = new Circle(points[i], 2 + Math.random() * 10, 'rgba(255,255,255,0.3)');
                     points[i].circle = c;
                 }
             }
 
             // Event handling
             function addListeners() {
-                if(!('ontouchstart' in window)) {
+                if (!('ontouchstart' in window)) {
                     window.addEventListener('mousemove', mouseMove);
                 }
                 window.addEventListener('scroll', scrollCheck);
@@ -206,7 +214,7 @@
                     posx = e.pageX;
                     posy = e.pageY;
                 }
-                else if (e.clientX || e.clientY)    {
+                else if (e.clientX || e.clientY) {
                     posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
                     posy = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
                 }
@@ -215,7 +223,7 @@
             }
 
             function scrollCheck() {
-                if(document.body.scrollTop > height) animateHeader = false;
+                if (document.body.scrollTop > height) animateHeader = false;
                 else animateHeader = true;
             }
 
@@ -229,23 +237,23 @@
             // animation
             function initAnimation() {
                 animate();
-                for(var i in points) {
+                for (var i in points) {
                     shiftPoint(points[i]);
                 }
             }
 
             function animate() {
-                if(animateHeader) {
-                    ctx.clearRect(0,0,width,height);
-                    for(var i in points) {
+                if (animateHeader) {
+                    ctx.clearRect(0, 0, width, height);
+                    for (var i in points) {
                         // detect points in range
-                        if(Math.abs(getDistance(target, points[i])) < 4000) {
+                        if (Math.abs(getDistance(target, points[i])) < 4000) {
                             points[i].active = 0.3;
                             points[i].circle.active = 0.8;
-                        } else if(Math.abs(getDistance(target, points[i])) < 20000) {
+                        } else if (Math.abs(getDistance(target, points[i])) < 20000) {
                             points[i].active = 0.1;
                             points[i].circle.active = 0.5;
-                        } else if(Math.abs(getDistance(target, points[i])) < 40000) {
+                        } else if (Math.abs(getDistance(target, points[i])) < 40000) {
                             points[i].active = 0.02;
                             points[i].circle.active = 0.3;
                         } else {
@@ -261,40 +269,42 @@
             }
 
             function shiftPoint(p) {
-                TweenLite.to(p, 1+1*Math.random(), {x:p.originX-50+Math.random()*100,
-                    y: p.originY-50+Math.random()*100, ease:Circ.easeInOut,
-                    onComplete: function() {
+                TweenLite.to(p, 1 + 1 * Math.random(), {
+                    x: p.originX - 50 + Math.random() * 100,
+                    y: p.originY - 50 + Math.random() * 100, ease: Circ.easeInOut,
+                    onComplete: function () {
                         shiftPoint(p);
-                    }});
+                    }
+                });
             }
 
             // Canvas manipulation
             function drawLines(p) {
-                if(!p.active) return;
-                for(var i in p.closest) {
+                if (!p.active) return;
+                for (var i in p.closest) {
                     ctx.beginPath();
                     ctx.moveTo(p.x, p.y);
                     ctx.lineTo(p.closest[i].x, p.closest[i].y);
-                    ctx.strokeStyle = 'rgba(156,217,249,'+ p.active+')';
+                    ctx.strokeStyle = 'rgba(156,217,249,' + p.active + ')';
                     ctx.stroke();
                 }
             }
 
-            function Circle(pos,rad,color) {
+            function Circle(pos, rad, color) {
                 var _this = this;
 
                 // constructor
-                (function() {
+                (function () {
                     _this.pos = pos || null;
                     _this.radius = rad || null;
                     _this.color = color || null;
                 })();
 
-                this.draw = function() {
-                    if(!_this.active) return;
+                this.draw = function () {
+                    if (!_this.active) return;
                     ctx.beginPath();
                     ctx.arc(_this.pos.x, _this.pos.y, _this.radius, 0, 2 * Math.PI, false);
-                    ctx.fillStyle = 'rgba(156,217,249,'+ _this.active+')';
+                    ctx.fillStyle = 'rgba(156,217,249,' + _this.active + ')';
                     ctx.fill();
                 };
             }
@@ -313,13 +323,13 @@
 <% include statsabove %>
 
 <div id="content-box">
-<ul id="menu">
-    <li data-menuanchor="home"><a href="#home" class="menuhit">gogoNode</a></li>
-    <li data-menuanchor="features"><a href="#features" class="menuhit">特性</a></li>
-    <li data-menuanchor="usecases"><a href="#usecases" class="menuhit">解决方案</a></li>
-    <li data-menuanchor="graphs"><a href="#graphs" class="menuhit">图表</a></li>
-    <li data-menuanchor="about"><a href="#about" class="menuhit">关于我们</a></li>
-</ul>
+    <ul id="menu">
+        <li data-menuanchor="home"><a href="#home" class="menuhit">gogoNode</a></li>
+        <li data-menuanchor="features"><a href="#features" class="menuhit">特性</a></li>
+        <li data-menuanchor="usecases"><a href="#usecases" class="menuhit">解决方案</a></li>
+        <li data-menuanchor="graphs"><a href="#graphs" class="menuhit">图表</a></li>
+        <li data-menuanchor="about"><a href="#about" class="menuhit">关于我们</a></li>
+    </ul>
 </div>
 
 
@@ -330,11 +340,11 @@
             <h1>gogoNode</h1>
             <p>将您的想法存入知识图谱交给AI。</p>
             <ul class="submenu">
-            <li><a href="/login">登陆</a></li>
-            <li><a href="/signup">加入我们</a></li>
-            <li><a href="/#about">关于</a></li>
+                <li><a href="/login">登陆</a></li>
+                <li><a href="/signup">加入我们</a></li>
+                <li><a href="/#about">关于</a></li>
             </ul>
-       </div>
+        </div>
     </div>
     <div class="section" id="section1">
         <div class="slide">
@@ -345,11 +355,14 @@
                 <div class="video">
                     <div class="videoclick">
                         <ul class="submenu">
-                            <li><a href="https://vimeo.com/126170773" class="demo" data-featherlight="#video3" target="_blank">Demo</a></li>
+                            <li><a href="https://vimeo.com/126170773" class="demo" data-featherlight="#video3"
+                                   target="_blank">Demo</a></li>
                         </ul>
                     </div>
                     <div class="videoframe" id="video3">
-                        <iframe src="https://player.vimeo.com/video/126170773?title=0&byline=0&portrait=0" width="270" height="420" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                        <iframe src="https://player.vimeo.com/video/126170773?title=0&byline=0&portrait=0" width="270"
+                                height="420" frameborder="0" webkitallowfullscreen mozallowfullscreen
+                                allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -362,11 +375,14 @@
                 <div class="video">
                     <div class="videoclick">
                         <ul class="submenu">
-                            <li><a href="https://vimeo.com/126090432" class="demo" data-featherlight="#video1" target="_blank">Demo</a></li>
+                            <li><a href="https://vimeo.com/126090432" class="demo" data-featherlight="#video1"
+                                   target="_blank">Demo</a></li>
                         </ul>
                     </div>
                     <div class="videoframe" id="video1">
-                        <iframe src="https://player.vimeo.com/video/126090432?title=0&byline=0&portrait=0" width="270" height="420" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                        <iframe src="https://player.vimeo.com/video/126090432?title=0&byline=0&portrait=0" width="270"
+                                height="420" frameborder="0" webkitallowfullscreen mozallowfullscreen
+                                allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -380,11 +396,14 @@
                 <div class="video">
                     <div class="videoclick">
                         <ul class="submenu">
-                            <li><a href="https://vimeo.com/126149696" class="demo" data-featherlight="#video2" target="_blank">Demo</a></li>
+                            <li><a href="https://vimeo.com/126149696" class="demo" data-featherlight="#video2"
+                                   target="_blank">Demo</a></li>
                         </ul>
                     </div>
                     <div class="videoframe" id="video2">
-                        <iframe src="https://player.vimeo.com/video/126149696?title=0&byline=0&portrait=0" width="300" height="464" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                        <iframe src="https://player.vimeo.com/video/126149696?title=0&byline=0&portrait=0" width="300"
+                                height="464" frameborder="0" webkitallowfullscreen mozallowfullscreen
+                                allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -398,11 +417,14 @@
                 <div class="video">
                     <div class="videoclick">
                         <ul class="submenu">
-                            <li><a href="https://vimeo.com/126167185" class="demo" data-featherlight="#video4" target="_blank">Demo</a></li>
+                            <li><a href="https://vimeo.com/126167185" class="demo" data-featherlight="#video4"
+                                   target="_blank">Demo</a></li>
                         </ul>
                     </div>
                     <div class="videoframe" id="video4">
-                        <iframe src="https://player.vimeo.com/video/126167185?title=0&byline=0&portrait=0" width="270" height="420" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                        <iframe src="https://player.vimeo.com/video/126167185?title=0&byline=0&portrait=0" width="270"
+                                height="420" frameborder="0" webkitallowfullscreen mozallowfullscreen
+                                allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -416,11 +438,14 @@
                 <div class="video">
                     <div class="videoclick">
                         <ul class="submenu">
-                            <li><a href="https://vimeo.com/126086402" class="demo" data-featherlight="#video5" target="_blank">Demo</a></li>
+                            <li><a href="https://vimeo.com/126086402" class="demo" data-featherlight="#video5"
+                                   target="_blank">Demo</a></li>
                         </ul>
                     </div>
                     <div class="videoframe" id="video5">
-                        <iframe src="https://player.vimeo.com/video/126086402?autoplay=0&title=0&byline=0&portrait=0" width="270" height="420" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                        <iframe src="https://player.vimeo.com/video/126086402?autoplay=0&title=0&byline=0&portrait=0"
+                                width="270" height="420" frameborder="0" webkitallowfullscreen mozallowfullscreen
+                                allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -435,10 +460,13 @@
                 <p>找出您的知识体系中各个知识点的联系，挖掘问题。</p>
                 <ul class="submenu">
                     <li><a href="http://noduslabs.com/cases/connect-ideas-research-notes-graph/">Tutorial</a></li>
-                    <li><a href="https://vimeo.com/126172472" class="demo" data-featherlight="#video6" target="_blank">Demo</a></li>
+                    <li><a href="https://vimeo.com/126172472" class="demo" data-featherlight="#video6" target="_blank">Demo</a>
+                    </li>
                 </ul>
-                <div class="videoframe" id="video6"> <br>
-                    <iframe src="https://player.vimeo.com/video/126172472?autoplay=0&title=0&byline=0&portrait=0" width="270" height="420" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                <div class="videoframe" id="video6"><br>
+                    <iframe src="https://player.vimeo.com/video/126172472?autoplay=0&title=0&byline=0&portrait=0"
+                            width="270" height="420" frameborder="0" webkitallowfullscreen mozallowfullscreen
+                            allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -447,7 +475,8 @@
                 <h1>逻辑</h1>
                 <p>形象化您的思考逻辑，以便更好的推算。</p>
                 <ul class="submenu">
-                    <li><a href="http://noduslabs.com/cases/how-to-write-essay-inspiration-text-network-visualization/">Tutorial</a></li>
+                    <li><a href="http://noduslabs.com/cases/how-to-write-essay-inspiration-text-network-visualization/">Tutorial</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -477,7 +506,9 @@
                 <h1>SEO</h1>
                 <p>找到更合适的关键词组合来提高SEO优化水平。</p>
                 <ul class="submenu">
-                    <li><a href="http://noduslabs.com/cases/seo-tutorial-keyword-visualization-search-engine-optimization/">Tutorial</a></li>
+                    <li>
+                        <a href="http://noduslabs.com/cases/seo-tutorial-keyword-visualization-search-engine-optimization/">Tutorial</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -490,15 +521,15 @@
                 </ul>
             </div>
         </div>
-     <!--   <div class="slide">
-            <div class="intro">
-                <h1>SMM</h1>
-                <p>Quick visual summary of online discourse.</p>
-                <ul class="submenu">
-                    <li><a href="http://noduslabs.com/cases/twitter-xray-text-network-analysis/">Tutorial</a></li>
-                </ul>
-            </div>
-        </div>-->
+        <!--   <div class="slide">
+               <div class="intro">
+                   <h1>SMM</h1>
+                   <p>Quick visual summary of online discourse.</p>
+                   <ul class="submenu">
+                       <li><a href="http://noduslabs.com/cases/twitter-xray-text-network-analysis/">Tutorial</a></li>
+                   </ul>
+               </div>
+           </div>-->
     </div>
     <div class="section" id="section3">
         <div class="slide">
@@ -507,20 +538,24 @@
                 <p>基于大数据统计生成的哲学家之间关系的知识图谱。 </p>
                 <div class="videoclick">
                     <ul class="submenu">
-                        <li><a href="/infragraph/philosophy?go_next_site=wikipedia&hide_always=1&link_hashtags=1&go_next_override=1">View</a></li>
+                        <li>
+                            <a href="/infragraph/philosophy?go_next_site=wikipedia&hide_always=1&link_hashtags=1&go_next_override=1">View</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="videoframe">
-                <div class="graphshowcase">
-                    <div class="graphwindow"><span class="Centerer"></span><a href="/infragraph/philosophy?go_next_site=wikipedia&hide_always=1&link_hashtags=1&go_next_override=1"><img src="/images/sample-graph-infragraph-philosophy.png" border="0"></a></div>
-                </div>
+                    <div class="graphshowcase">
+                        <div class="graphwindow"><span class="Centerer"></span><a
+                                    href="/infragraph/philosophy?go_next_site=wikipedia&hide_always=1&link_hashtags=1&go_next_override=1"><img
+                                        src="/images/sample-graph-infragraph-philosophy.png" border="0"></a></div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="slide">
             <div class="intro">
-             <!--   <h2>Berlin</h2>
-                <p>"If you like Tresor you will also like Berghain" kind of constellation for the best Berlin places.</p>-->
+                <!--   <h2>Berlin</h2>
+                   <p>"If you like Tresor you will also like Berghain" kind of constellation for the best Berlin places.</p>-->
                 <h2>麦当劳</h2>
                 <p>如果您是个吃货而且最喜欢去金拱门那么叫“跟麦当劳一样美味的美食”的图谱很适合您。</p>
                 <div class="videoclick">
@@ -529,10 +564,12 @@
                     </ul>
                 </div>
                 <div class="videoframe">
-                            <div class="graphshowcase">
-                                <div class="graphwindow"><span class="Centerer"></span><a href="/travel/berlin?hide_when_small=1"><img src="/images/sample-graph-travel-berlin.png" border="0"></a></div>
-                            </div>
+                    <div class="graphshowcase">
+                        <div class="graphwindow"><span class="Centerer"></span><a
+                                    href="/travel/berlin?hide_when_small=1"><img
+                                        src="/images/sample-graph-travel-berlin.png" border="0"></a></div>
                     </div>
+                </div>
             </div>
         </div>
         <div class="slide">
@@ -541,13 +578,17 @@
                 <p>The most interesting techno and leftfield labels, curated by DEM LEEDZ.</p>
                 <div class="videoclick">
                     <ul class="submenu">
-                        <li><a href="/musicgraph/labels?go_next_site=soundcloud&link_hashtags=1&hide_always=1&go_next_override=1">View</a></li>
+                        <li>
+                            <a href="/musicgraph/labels?go_next_site=soundcloud&link_hashtags=1&hide_always=1&go_next_override=1">View</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="videoframe">
-                <div class="graphshowcase">
-                    <div class="graphwindow"><span class="Centerer"></span><a href="/musicgraph/labels?go_next_site=soundcloud&link_hashtags=1&hide_always=1&go_next_override=1"><img src="/images/sample-graph-musicgraph-labels.png" border="0"></a></div>
-                </div>
+                    <div class="graphshowcase">
+                        <div class="graphwindow"><span class="Centerer"></span><a
+                                    href="/musicgraph/labels?go_next_site=soundcloud&link_hashtags=1&hide_always=1&go_next_override=1"><img
+                                        src="/images/sample-graph-musicgraph-labels.png" border="0"></a></div>
+                    </div>
                 </div>
 
             </div>
@@ -562,9 +603,11 @@
                     </ul>
                 </div>
                 <div class="videoframe">
-                <div class="graphshowcase">
-                    <div class="graphwindow"><span class="Centerer"></span><a href="/amazon/deepSurvival?hide_when_small=1"><img src="/images/sample-graph-amazon-deepSurvival.png" border="0"></a></div>
-                </div>
+                    <div class="graphshowcase">
+                        <div class="graphwindow"><span class="Centerer"></span><a
+                                    href="/amazon/deepSurvival?hide_when_small=1"><img
+                                        src="/images/sample-graph-amazon-deepSurvival.png" border="0"></a></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -578,9 +621,10 @@
                     </ul>
                 </div>
                 <div class="videoframe">
-                <div class="graphshowcase">
-                    <div class="graphwindow"><span class="Centerer"></span><a href="/tarot?hide_when_small=1"><img src="/images/sample-graph-tarot.png" border="0"></a></div>
-                </div>
+                    <div class="graphshowcase">
+                        <div class="graphwindow"><span class="Centerer"></span><a href="/tarot?hide_when_small=1"><img
+                                        src="/images/sample-graph-tarot.png" border="0"></a></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -597,7 +641,9 @@
                 </div>
                 <div class="videoframe">
                     <div class="graphshowcase">
-                        <div class="graphwindow"><span class="Centerer"></span><a href="/login"><img src="/images/sample-graph-add.png" border="0" width="220" height="220"></a></div>
+                        <div class="graphwindow"><span class="Centerer"></span><a href="/login"><img
+                                        src="/images/sample-graph-add.png" border="0" width="220" height="220"></a>
+                        </div>
                         <ul class="submenu">
                             <li><a href="http://noduslabs.com/network-graphs/">More Samples</a></li>
                         </ul>
@@ -609,25 +655,37 @@
     <div class="section" id="section4">
         <div class="slide">
             <div class="intro">
-                <p>gogoNode converts texts, notes, ideas into a network constellation, so you can make sense of your knowledge and stimulate your imagination.</p>
-               <br>
-                <p class="smallcaption">Created by agent Paranyushkin / <a href="http://www.noduslabs.com" target="_blank">Nodus Labs</a>
+                <p>gogoNode converts texts, notes, ideas into a network constellation, so you can make sense of your
+                    knowledge and stimulate your imagination.</p>
+                <br>
+                <p class="smallcaption">Created by agent Paranyushkin / <a href="http://www.noduslabs.com"
+                                                                           target="_blank">Nodus Labs</a>
                 </p>
 
             </div>
         </div>
         <div class="slide">
             <div class="intro">
-                <p class="smallcaption">This free open-source tool is developed by <a href="http://www.noduslabs.com" target="_blank">Nodus Labs</a> (@noduslabs). Contact us to get an <a href="http://noduslabs.com/features/invite/" target="_blank">invitation code</a> to use this online version or install it on your computer from <a href="http://github.com/noduslabs/infranodus" target="_blank">GitHub</a>.<br>
-                    <br>gogoNode runs on <a href="http://www.neo4j.org" target="_blank" rel="nofollow">Neo4J</a> graph database, <a href="http://www.sigmajs.org" target="_blank" rel="nofollow">Sigma.Js</a> graph visualization library, Node.Js and uses <a href="http://www.textexture.com" target="_blank">Textexture text network analysis algorithm</a>.
-                    <br><br>This software is offered "as is" with no warranty or legal liability of any kind, so, please, use it at your own risk.
+                <p class="smallcaption">This free open-source tool is developed by <a href="http://www.noduslabs.com"
+                                                                                      target="_blank">Nodus Labs</a>
+                    (@noduslabs). Contact us to get an <a href="http://noduslabs.com/features/invite/" target="_blank">invitation
+                        code</a> to use this online version or install it on your computer from <a
+                            href="http://github.com/noduslabs/infranodus" target="_blank">GitHub</a>.<br>
+                    <br>gogoNode runs on <a href="http://www.neo4j.org" target="_blank" rel="nofollow">Neo4J</a> graph
+                    database, <a href="http://www.sigmajs.org" target="_blank" rel="nofollow">Sigma.Js</a> graph
+                    visualization library, Node.Js and uses <a href="http://www.textexture.com" target="_blank">Textexture
+                        text network analysis algorithm</a>.
+                    <br><br>This software is offered "as is" with no warranty or legal liability of any kind, so,
+                    please, use it at your own risk.
                 </p>
             </div>
         </div>
         <div class="slide">
             <div class="intro">
                 <h1>Bookmarklet</h1>
-                <p class="caption">Save interesting text excerpts into a graph – drag this bookmarklet into your browser's toolbar:<br><br><a style="cursor: move;" href="javascript:var a=window,b=document,c=encodeURIComponent,s='';s=document.getSelection().toString();if(s!=''){d=a.open('https://infranodus.com/bookmarks/edit?url='+c(b.location)+'&urltitle='+c(s),'bkmk_popup','left='+((a.screenX||a.screenLeft)+10)+',top='+((a.screenY||a.screenTop)+10)+',height=420px,width=550px,resizable=1,alwaysRaised=1');}else{d=a.open('https://infranodus.com/bookmarks/edit?url='+c(b.location)+'&urltitle='+c(b.title),'bkmk_popup','left='+((a.screenX||a.screenLeft)+10)+',top='+((a.screenY||a.screenTop)+10)+',height=420px,width=550px,resizable=1,alwaysRaised=1');}a.setTimeout(function(){d.focus()},300);">GraphMark</a>
+                <p class="caption">Save interesting text excerpts into a graph – drag this bookmarklet into your
+                    browser's toolbar:<br><br><a style="cursor: move;"
+                                                 href="javascript:var a=window,b=document,c=encodeURIComponent,s='';s=document.getSelection().toString();if(s!=''){d=a.open('https://infranodus.com/bookmarks/edit?url='+c(b.location)+'&urltitle='+c(s),'bkmk_popup','left='+((a.screenX||a.screenLeft)+10)+',top='+((a.screenY||a.screenTop)+10)+',height=420px,width=550px,resizable=1,alwaysRaised=1');}else{d=a.open('https://infranodus.com/bookmarks/edit?url='+c(b.location)+'&urltitle='+c(b.title),'bkmk_popup','left='+((a.screenX||a.screenLeft)+10)+',top='+((a.screenY||a.screenTop)+10)+',height=420px,width=550px,resizable=1,alwaysRaised=1');}a.setTimeout(function(){d.focus()},300);">GraphMark</a>
                 </p>
             </div>
         </div>
