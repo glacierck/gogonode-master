@@ -25,7 +25,7 @@ var options = require('../options');
 // 注册的形式路线功能呈现。ejs从视图模板,将“注册”添加到标题字段
 
 exports.form = function(req, res){
-    res.render('register', { title: 'InfraNodus: Polysingularity Thinking Tool' });
+    res.render('register', { title: 'gogoNode: Polysingularity Thinking Tool' });
 };
 
 // This happens when the user accesses /register with a POST request

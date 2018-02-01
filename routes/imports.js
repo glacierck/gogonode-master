@@ -94,7 +94,7 @@ exports.render = function(req, res) {
                 for (var t = 0; t < notebooks.length; t++) {
                     notebooks_names.push(notebooks[t].name);
                 }
-                res.render('import', { title: 'Import Data to InfraNodus', context: '', fornode: '', notebooks: notebooks_names, evernote: req.session.oauthAccessToken});
+                res.render('import', { title: 'Import Data to gogoNode', context: '', fornode: '', notebooks: notebooks_names, evernote: req.session.oauthAccessToken});
             }
 
         });
@@ -113,7 +113,7 @@ exports.render = function(req, res) {
     }
     else {
 
-        res.render('import', { title: 'Import Data to InfraNodus', evernote: '', context: req.query.context, notebooks: '', fornode: req.query.fornode });
+        res.render('import', { title: 'Import Data to gogoNode', evernote: '', context: req.query.context, notebooks: '', fornode: req.query.fornode });
 
     }
 
@@ -1304,7 +1304,7 @@ exports.submit = function(req, res,  next) {
                         }
 
                         else {
-                            err = 'Sorry, but InfraNodus does not recognize this kind of content yet. Add a feature request on our GitHub and we will look into it.';
+                            err = 'Sorry, but gogoNode does not recognize this kind of content yet. Add a feature request on our GitHub and we will look into it.';
                             callback(err);
                         }
 
@@ -1422,7 +1422,7 @@ exports.submit = function(req, res,  next) {
         }
 
         else {
-            res.error('Sorry, but InfraNodus does not recognize this kind of content yet. Add a feature request on GitHub and we will look into it.');
+            res.error('Sorry, but gogoNode does not recognize this kind of content yet. Add a feature request on GitHub and we will look into it.');
             res.redirect('back');
         }
 

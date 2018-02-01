@@ -65,7 +65,7 @@ if (fs.existsSync(configPath)) {
 
     exports.invite = parsed['secrets']['invitation'];
 
-    exports.default_user = parsed['infranodus']['default_user'];
+    exports.default_user = parsed['gogoNode']['default_user'];
 
 
 }

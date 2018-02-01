@@ -9,7 +9,7 @@
         "invitation": "secretcode"
     },
 
-    "infranodus": {
+    "gogoNode": {
         "default_user": ""
     },
 

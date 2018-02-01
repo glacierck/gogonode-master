@@ -322,9 +322,10 @@
 
         /**
          * When resizing is finished, we adjust the slides sizes and positions
+         * 当调整完成后,我们调整幻灯片的大小和位置
          */
         FP.reBuild = function(resizing){
-            if(container.hasClass(DESTROYED)){ return; }  //nothing to do if the plugin was destroyed
+            if(container.hasClass(DESTROYED)){ return; }  //nothing to do if the plugin was destroyed如果插件被毁
 
             isResizing = true;
 
@@ -347,7 +348,7 @@
 
                 $(this).css('height', windowsHeight + 'px');
 
-                //resizing the scrolling divs
+                //resizing the scrolling divs 调整滚动体
                 if(options.scrollOverflow){
                     if(slides.length){
                         slides.each(function(){
@@ -358,7 +359,7 @@
                     }
                 }
 
-                //adjusting the position fo the FULL WIDTH slides...
+                //adjusting the position fo the FULL WIDTH slides...调整位置fo全宽幻灯片…
                 if (slides.length > 1) {
                     landscapeScroll(slidesWrap, slidesWrap.find(SLIDE_ACTIVE_SEL));
                 }
@@ -377,7 +378,7 @@
             $.isFunction( options.afterReBuild ) && !resizing && options.afterReBuild.call(container);
         };
 
-        //flag to avoid very fast sliding for landscape sliders
+        //flag to avoid very fast sliding for landscape sliders避免快速滑动
         var slideMoving = false;
 
         var isTouchDevice = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|playbook|silk|BlackBerry|BB10|Windows Phone|Tizen|Bada|webOS|IEMobile|Opera Mini)/);
@@ -399,25 +400,25 @@
                 'position': 'relative'
             });
 
-            //adding a class to recognize the container internally in the code
+            //adding a class to recognize the container internally in the code 添加一个类来识别代码中的容器内部
             container.addClass(WRAPPER);
             $('html').addClass(ENABLED);
         }
-        //trying to use fullpage without a selector?
+        //trying to use fullpage without a selector?尝试使用fullpage
         else{
             showError('error', 'Error! Fullpage.js needs to be initialized with a selector. For example: $(\'#myContainer\').fullpage();');
         }
 
-        //if css3 is not supported, it will use jQuery animations
+        //if css3 is not supported, it will use jQuery animations如果不支持css 3,它将使用jq动画
         if(options.css3){
             options.css3 = support3d();
         }
 
         FP.setAllowScrolling(true);
-        container.removeClass(DESTROYED); //in case it was destroyed before initilizing it again
+        container.removeClass(DESTROYED); //in case it was destroyed before initilizing it again 以防被毁之前initilizing重复执行
 
 
-        //adding internal class names to void problem with common ones
+        //adding internal class names to void problem with common ones 添加内部类名与常见的无效的问题
         $(options.sectionSelector).each(function(){
             $(this).addClass(SECTION);
         });
@@ -425,7 +426,7 @@
             $(this).addClass(SLIDE);
         });
 
-        //creating the navigation dots
+        //creating the navigation dots 创建导航点
         if (options.navigation) {
             addVerticalNavigation();
         }
@@ -435,7 +436,7 @@
             var slides = $(this).find(SLIDE_SEL);
             var numSlides = slides.length;
 
-            //if no active section is defined, the 1st one will be the default one
+            //if no active section is defined, the 1st one will be the default one 如果没有定义锁定内容,将默认第一个
             if(!index && $(SECTION_ACTIVE_SEL).length === 0) {
                 $(this).addClass(ACTIVE);
             }
@@ -457,13 +458,13 @@
             if (typeof options.anchors[index] !== 'undefined') {
                 $(this).attr('data-anchor', options.anchors[index]);
 
-                //activating the menu / nav element on load
+                //activating the menu / nav element on load 激活菜单/导航元素加载
                 if($(this).hasClass(ACTIVE)){
                     activateMenuAndNav(options.anchors[index], index);
                 }
             }
 
-            // if there's any slide
+            // if there's any slide如果有任何幻灯片
             if (numSlides > 0) {
                 var sliderWidth = numSlides * 100;
                 var slideWidth = 100 / numSlides;
@@ -491,7 +492,7 @@
 
                 var startingSlide = that.find(SLIDE_ACTIVE_SEL);
 
-                //if the slide won#t be an starting point, the default will be the first one
+                //if the slide won#t be an starting point, the default will be the first one 如果幻灯片# t是一个起点,将第一个默认
                 if(!startingSlide.length){
                     slides.eq(0).addClass(ACTIVE);
                 }
@@ -1653,11 +1654,11 @@
 
             //needs scroll?
             if ( contentHeight > scrollHeight) {
-                //was there already an scroll ? Updating it
+                //was there already an scroll ? Updating it已经有一个滚动吗?更新它
                 if(scrollable.length){
                     scrollable.css('height', scrollHeight + 'px').parent().css('height', scrollHeight + 'px');
                 }
-                //creating the scrolling
+                //creating the scrolling创建一个滚动
                 else{
                     if(options.verticalCentered){
                         element.find(TABLE_CELL_SEL).wrapInner('<div class="' + SCROLLABLE + '" />');
@@ -1674,7 +1675,7 @@
                 }
             }
 
-            //removing the scrolling when it is not necessary anymore
+            //removing the scrolling when it is not necessary anymore删除滚动时没有必要了
             else{
                 removeSlimScroll(element);
             }
