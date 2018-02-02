@@ -1,10 +1,13 @@
 /**
  *
  */
-
+var express = require('express');//加载express模块
+var http = require('http');
+var path = require('path');
+var passport = require('passport');
 var api = require('./routes/api');
 var api2 = require('./routes/api2');
-var express = require('express');
+
 var routes = require('./routes');
 var oauths = require('./routes/evernote');
 var entries = require('./routes/entries');
@@ -16,16 +19,15 @@ var register = require('./routes/register');
 var login = require('./routes/login');
 var main = require('./routes/main');
 var messages = require('./lib/messages');
-var http = require('http');
-var path = require('path');
 
-var pass = require('./lib/pass')
-var passport = require('passport');
+
+var pass = require('./lib/pass');
+
 
 var settings = require('./routes/settings');
 var imports = require('./routes/imports');
 
-var app = express();
+var app = express();//生成express实例
 
 var appio = http.createServer(app);
 var io = require('socket.io')(appio);
@@ -149,22 +151,33 @@ if (process.env.ERROR_ROUTE) {
 
 appio.listen(app.get('port'), function(){
 
-  console.log('Express server listening on port ' + app.get('port'));
+  console.log('gogoNode server listening on port ' + app.get('port'));
 });
 
+global.gc();
+function getBieberTweet(cb) {
+    cb('check out iambieber.com');
+}
 var chat = io.on('connection', function(socket){
-
+    console.log("客户端的消息: " + message + " -来自" + socket.id);
+    var tweets = setInterval(function () {
+        getBieberTweet(function (tweet) {
+            socket.volatile.emit('bieber tweet', tweet);
+        });
+    }, 100);
     socket.on('disconnect', function(data){
-        // console.log('user disconnected');
+        clearInterval(tweets);
+        console.log('user disconnected');
         var room = findClientsSocket(io, data.id);
         // Notify the other person in the chat room 通知对方在聊天室
         // that his partner has left 他的合作伙伴已经离开
-        socket.broadcast.to(socket.room).emit('leave', {
+        socket.broadcast.to(socket.room).emit('leave', {//广播离开事件
             boolean: true,
             people: room.length
         });
 
     });
+
     socket.on('chat message', function(msg){
         console.log('message: ' + msg);
         io.sockets.in(socket.room).emit('chat message', msg);
