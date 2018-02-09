@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
     <link rel="stylesheet" href="/stylesheets/side-menu.css">
     <script src="/javascripts/sigma/sigma.min.js"></script>
     <script src="/javascripts/sigma/plugins/sigma.parsers.json.min.js"></script>
@@ -26,75 +26,63 @@
         <span></span>
     </a>
 
-
     <% include menu %>
 
+    <div id="content">
+        <div id="statements" style="background: white;">
+            <p>前面<a href="/signup">注册</a></p>
+            <% include messages %>
+            <form action='/login' method='post' class="pure-form pure-form-stacked">
+                <p>
+                    <input type='text' name='username' placeholder='账号'/>
+                </p>
+                <p>
+                    <input type='password' name='password' placeholder='登录密码'/>
+                </p>
+                <input type='hidden' name='redirect' id="redirect" value=""/>
+                <p>
+                    <button type='submit' class="pure-button pure-button-primary">登录</button>
+                </p>
+            </form>
 
+        </div>
 
-            <div id="content">
-                <div id="statements" style="background: white;">
-                    <p>Please, log in below or <a href="/signup">sign up</a>.</p>
-                    <% include messages %>
-                    <form action='/login' method='post' class="pure-form pure-form-stacked">
-                            <p>
-                            <input type='text' name='username' placeholder='username' />
-                            </p>
-                            <p>
-                            <input type='password' name='password' placeholder='password' />
-                            </p>
-                            <input type='hidden' name='redirect' id="redirect" value=""/>
-                            <p>
-                            <button type='submit' class="pure-button pure-button-primary">log in</button>
-                            </p>
-                    </form>
+        <div id="graph-container" style="background: white;"></div>
 
-
-
-
-                </div>
-
-                <div id="graph-container" style="background: white;"></div>
-
-
-            </div>
-
-
-
+    </div>
 
 </div>
 
 
 <script>
-;(function(){
+    ;(function () {
 
-    var jsonpath = '/files/intro.json';
-
-
+        var jsonpath = '/files/intro.json';
 
 // The button to hide / show statements
 
-    $("#graph-link").click(function(e) {
-        e.preventDefault();
-        $("#statements").fadeToggle();
-    });
+        $("#graph-link").click(function (e) {
+            e.preventDefault();
+            $("#statements").fadeToggle();
+        });
 
 // Add a method to the graph model that returns an
 // object with every neighbors of a node inside:
 
-    sigma.classes.graph.addMethod('neighbors', function(nodeId) {
-        var k,
+        sigma.classes.graph.addMethod('neighbors', function (nodeId) {
+            var k,
                 neighbors = {},
                 index = this.allNeighborsIndex[nodeId] || {};
 
-        for (k in index)
-            neighbors[k] = this.nodesIndex[k];
+            for (k in index)
+                neighbors[k] = this.nodesIndex[k];
 
-        return neighbors;
-    });
+            return neighbors;
+        });
 
 // Initialize JSON parser for SIGMA visualization
 
-    sigma.parsers.json(
+        sigma.parsers.json(
             jsonpath,
             {
                 container: 'graph-container',
@@ -110,14 +98,14 @@
                     labelThreshold: 8
                 }
             },
-            function(sigma) {
+            function (sigma) {
 
                 var i,
-                        timeout = 4000,
-                        nodes = sigma.graph.nodes(),
-                        color_context = '#666',
-                        color_addcontext = '#666688',
-                        len = nodes.length;
+                    timeout = 4000,
+                    nodes = sigma.graph.nodes(),
+                    color_context = '#666',
+                    color_addcontext = '#666688',
+                    len = nodes.length;
 
 
                 // This is a fix for JSON
@@ -139,11 +127,9 @@
 
                 // Don't run it forever not to overheat :)
 
-                setTimeout(function() {
+                setTimeout(function () {
                     sigma.stopForceAtlas2();
-                },timeout);
-
-
+                }, timeout);
 
 
                 // Zoom Graph Control
@@ -151,14 +137,14 @@
                 var c = sigma.camera;
 
 
-                $("#zoom-in").on('click', function(e) {
+                $("#zoom-in").on('click', function (e) {
                     // Zoom in - single frame :
                     c.goTo({
                         ratio: c.ratio / c.settings('zoomingRatio')
                     });
                 });
 
-                $("#zoom-out").on('click', function(e) {
+                $("#zoom-out").on('click', function (e) {
                     // Zoom out - single frame :
                     c.goTo({
                         ratio: c.ratio * c.settings('zoomingRatio')
@@ -166,45 +152,36 @@
                 });
 
 
-
-
             }
-    );
+        );
 
 
-    $(document).ready(function(){
-    function getUrlVars()
-    {
-        var vars = [], hash;
-        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-        for(var i = 0; i < hashes.length; i++)
-        {
-            hash = hashes[i].split('=');
-            vars.push(hash[0]);
-            vars[hash[0]] = hash[1];
-        }
-        return vars;
-    }
+        $(document).ready(function () {
+            function getUrlVars() {
+                var vars = [], hash;
+                var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                for (var i = 0; i < hashes.length; i++) {
+                    hash = hashes[i].split('=');
+                    vars.push(hash[0]);
+                    vars[hash[0]] = hash[1];
+                }
+                return vars;
+            }
 
-    var redirect = getUrlVars()["redirect"];
+            var redirect = getUrlVars()["redirect"];
 
-    $('#redirect').val(redirect);
+            $('#redirect').val(redirect);
 
 
-    });
+        });
 
 
-
-
-})();
-
+    })();
 
 
 </script>
 
 <script src="/javascripts/ui.js"></script>
-
-
 
 <% include statsbelow %>
 
